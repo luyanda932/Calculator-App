@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <table border="1">
+        <tbody>
+            <tr>
+                <td colspan="4">
+                    <input type="text" id="inputBox" value="0">
+                </td>
+            </tr>
+            <tr>
+                <td class="digitButton" onclick="digitBtnPressed(7)">7</td>
+                <td class="digitButton" onclick="digitBtnPressed(8)">8</td>
+                <td class="digitButton" onclick="digitBtnPressed(9)">9</td>
+                <td class="operatorButton" id="button" onclick="operatorBtnClicked('x')">x</td>
+            </tr>
+            <tr>
+                <td class="digitButton" onclick="digitBtnPressed(4)">4</td>
+                <td class="digitButton" onclick="digitBtnPressed(5)">5</td>
+                <td class="digitButton" onclick="digitBtnPressed(6)">6</td>
+                <td class="operatorButton" onclick="operatorBtnClicked('-')">-</td>
+            </tr>
+            <tr>
+                <td class="digitButton" onclick="digitBtnPressed(1)">1</td>
+                <td class="digitButton" onclick="digitBtnPressed(2)">2</td>
+                <td class="digitButton" onclick="digitBtnPressed(3)">3</td>
+                <td class="operatorButton" onclick="operatorBtnClicked('+')">+</td>
+            </tr>
+            <tr>
+                <td class="digitButton" onclick="digitBtnPressed(0)" colspan="2">0</td>
+                <td class="ACButton" onclick="btnACPressed()">AC</td>
+                <td class="operatorButton" onclick="operatorBtnClicked('/')">/</td>
+            </tr>
+            <tr>
+                <td class="operatorButton" onclick="equalsBtnPressed()" colspan="4">=</td>
+            </tr>
+        </tbody>
+
+        <script>
+            var newline = true; // Boolean variable. Determines if the next thing the user types should be on a new line
+            var value1;
+            var currentOperator;
+
+            // Event handlers for when any digit button is pressed
+            function digitBtnPressed(button) {
+                if (newline == true) {
+                    document.getElementById("inputBox").value = button;
+                    newline = false;
+                } else {
+                    var currentValue = document.getElementById("inputBox").value;
+                    document.getElementById("inputBox").value = currentValue + button;
+                }
+            }
+
+            // Event handler for when the AC button is pressed
+            function btnACPressed() {
+                document.getElementById("inputBox").value = "0";
+                newline = true;
+            }
+
+            // Event handler for operator buttons
+            function operatorBtnClicked(operator) {
+                    newline = true;
+                currentOperator = operator;
+                value1 = parseInt(document.getElementById("inputBox").value);
+            }
+
+            // Event handler for equals button
+            function equalsBtnPressed() {
+                var value2 = parseInt(document.getElementById("inputBox").value);
+                var finalTotal;
+
+                switch (currentOperator) {
+                    case '+':
+                        finalTotal = value1 + value2;
+                        break;
+                    case '-':
+                        finalTotal = value1 - value2;
+                        break;
+                    case 'x':
+                        finalTotal = value1 * value2;
+                        break;
+                    case '/':
+                        finalTotal = value1 / value2;
+                        break;
+                    default:
+                        finalTotal = "Error";
+                }
+
+                document.getElementById("inputBox").value = finalTotal;
+                newline = true;
+                value1 = 0;
+            }
+        </script>
+    </table>
+</body>
+
+</html>

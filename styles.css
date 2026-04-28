@@ -9,8 +9,9 @@ body {
 
 #display {
     width: 100%;
+    height: 70px;
     padding: 20px;
-    font-size: 2rem;
+    font-size: 3rem;
     text-align: left;
     border: none;
     background-color: hsl(0, 0%, 20%);

@@ -1,6 +1,11 @@
 const display = document.getElementById("display");
+let newline = false;
 
 function appendToDisplay(value) {
+  if (newline) {
+    clearDisplay();
+    newline = false;
+  }
   let displayString = display.value;
   if (displayString.match(/(\d+\.\d+)$/)) {
     if (value === ".") {
@@ -30,6 +35,7 @@ function clearDisplay() {
 }
 
 function calculate() {
+  newline = true;
   try {
     display.value = eval(display.value);
   } catch (error) {
